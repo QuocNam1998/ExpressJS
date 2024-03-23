@@ -1,0 +1,15 @@
+{
+  "name": "helloworld",
+  "version": "1.0.0",
+  "description": "Hello World",
+  "main": "hello-world.js",
+  "scripts": {
+    "test": "Hello World test",
+    "start": "node hello-world.js"
+  },
+  "author": "Nam FullStack",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
