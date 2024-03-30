@@ -1,0 +1,60 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      th,
+      td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+
+      tr:hover {
+        background-color: #ccc;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="topnav">
+      <a class="active" href="/">Home</a>
+      <a href="/create">Create user</a>
+    </div>
+    <h1>List user:</h1>
+
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>City</th>
+        <th>Action</th>
+      </tr>
+      <% for (var i = 0; i < listUser.length ; i++) { %>
+
+      <tr>
+        <td><%= listUser[i].id %></td>
+        <td><%= listUser[i].name %></td>
+        <td><%= listUser[i].email %></td>
+        <td><%= listUser[i].city %></td>
+        <td>
+          <div>
+            <a href="/edit/<%= listUser[i].id %>">Edit</a>
+            <form action="/delete/<%= listUser[i].id %>" method="get">
+              <button>Delete</button>
+            </form>
+          </div>
+        </td>
+      </tr>
+      <% } %>
+    </table>
+  </body>
+</html>
