@@ -1,44 +1,36 @@
 import connection from "../config/database.js";
+import User from "../models/User.js";
 
 export const getListUser = async () => {
-  const [result] = await connection.execute("select * from Users u");
-  return result;
+  const rep = await User.find({}).exec();
+  return rep;
 };
 export const createUser = async (req, res) => {
   const { email, username, city } = req.body;
   try {
-    const [results] = await connection.execute(
-      `INSERT INTO Users (email, name, city)
-       VALUES (?, ?, ?)`,
-      [email, username, city]
-    );
+    const user = new User({
+      username: username,
+      email: email,
+      city: city,
+    });
+    user.save();
     res.send("create user successfully ");
   } catch (err) {
-    console.log(err);
+    console.log("An error occured: ", err);
   }
 };
 export const getUserById = async (id) => {
-  const [result] = await connection.execute(
-    "select * from Users where id = ?",
-    [id]
-  );
-  return result;
+  const userRep = await User.findById(id).exec();
+  return userRep;
 };
 export const updateUserById = async (req, res) => {
   const { username, email, city } = req.body;
   const { id } = req.params;
-
-  const [result] = await connection.execute(
-    `UPDATE Users
-    SET name = ?, email = ?, city = ?
-    WHERE id = ?;`,
-    [username, email, city, id]
-  );
-
-  res.send("update user successfully ");
+  await User.findByIdAndUpdate(id, { username, email, city });
+  res.redirect("/");
 };
 export const deleteUserById = async (req, res) => {
   const { id } = req.params;
-  await connection.execute(`DELETE FROM Users WHERE id=?;`, [id]);
-  res.send("delete user successfully ");
+  await User.deleteOne({ _id: id });
+  res.redirect("/");
 };

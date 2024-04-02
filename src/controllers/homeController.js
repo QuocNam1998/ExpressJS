@@ -10,9 +10,7 @@ const create = (req, res) => {
 };
 const edit = async (req, res) => {
   const user = await getUserById(req.params.id);
-
-  let detailUser = user && user.length > 0 ? user[0] : {};
-  res.render("edit.ejs", { theUser: detailUser });
+  res.render("edit.ejs", { theUser: user ? user : {} });
 };
 const getUsers = async (req, res) => {
   try {
