@@ -19,7 +19,7 @@ app.use(
 // connect to server
 connection();
 //
-// app.use(webRouter());
+app.use(webRouter());
 app.use(webApi());
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

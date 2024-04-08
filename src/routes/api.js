@@ -1,14 +1,17 @@
 import express from "express";
 import { getListUser } from "../services/CRUD.js";
-const router = express.Router();
+import { postCreateUser } from "../controllers/apiController.js";
+const routerAPI = express.Router();
 const webApi = () => {
-  router.get("/v1/api/users", async (req, res) => {
+  routerAPI.get("/v1/api/users", async (req, res) => {
     const listUser = await getListUser();
     res.status(200).json({
       errorCode: 0,
       data: listUser,
     });
   });
-  return router;
+  routerAPI.post("/v1/api/users", postCreateUser);
+
+  return routerAPI;
 };
 export default webApi;
